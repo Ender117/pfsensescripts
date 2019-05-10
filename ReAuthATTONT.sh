@@ -15,23 +15,23 @@
      /etc/rc.linkup stop wan
 
      #Power cycle ONT
-     snmpset
+     snmpset -v1 -c communitystring ip .1.3.6.1.4.1.850.100.1.10.2.1.4.1 i 3
      
 
      #Power on ATT gateway
-     snmpset
+     snmpset -v1 -c communitystring ip .1.3.6.1.4.1.850.100.1.10.2.1.4.1 i 2
 
      #Wait 3 min for gateway to Auth
      sleep 180
 
      # Power down gateway
-     snmpset
+     snmpset -v1 -c communitystring ip .1.3.6.1.4.1.850.100.1.10.2.1.4.1 i 1
 
      # Turn on Wan port
      ifconfig igb0 up 
      /etc/rc.linkup start wan
 
  else
-     echo >&2 "cannot acquire lock, another ReAuth script is running"
+     echo >&2 "cannot acquire lock, another ReAuth script already running"
      exit 0
  fi
