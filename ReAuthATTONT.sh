@@ -5,12 +5,12 @@
  lockdir=/tmp/ReAuthATTONT.lock
  if mkdir "$lockdir"
  then
-     echo >&2 "Re-authing ONT"
 
      # Remove lockdir when the script finishes, or when it receives a signal
      trap 'rm -rf "$lockdir"' INT TERM EXIT    # remove directory when script finishes
      
-
+     echo >&2 "Re-authing ONT"
+     
      #Shutdown Wan port
      /etc/rc.linkup stop wan
      ifconfig igb0 down 
